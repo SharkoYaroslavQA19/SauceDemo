@@ -1,0 +1,7 @@
+1. Upon successful authorization, the catalog opens.
+2. If the data is entered incorrectly, an error appears
+3. If you click on the add item to cart button, the item should fit in the cart.
+4. The shopping cart must contain a description of the product (price, information about the product)
+5. When you click on the basket, the basket should open
+6. It should be possible to remove an item from the cart and from the catalog
+7. When making a purchase, you must fill in all the fields, in case of incorrectly entered data, a corresponding message should be displayed
