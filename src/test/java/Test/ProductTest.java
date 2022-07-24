@@ -1,25 +1,23 @@
 package Test;
 
-
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
+public class ProductTest extends BaseTest {
 
-public class ItemDetailsTest extends BaseTest {
-
-  @Test(description = "checking information about all products",groups = {"regression"} ,dataProvider = "ProductInformationOnDetailPage")
-   public void verifyItemNameAndPriceOnDetailsPage(String productName, String priceProduct, String description) {
+    @Test(description = "Checking the availability of products in the catalog by name, price and description", groups = {"regression"}, dataProvider = "isProductInCatalogPresentTestData")
+    public void isProductInCatalogPresentTest(String productName, String priceProduct, String description) {
         LoginPageFactory.setUserName(USERNAME);
         LoginPageFactory.setPassword(PASSWORD);
         LoginPageFactory.clickLoginButton();
-        ProductsPage.openItemByName(productName);
-        assertEquals(ItemDetailsPage.getItemName(), productName);
-        assertEquals(ItemDetailsPage.getItemPrice(), priceProduct);
-        assertEquals(ItemDetailsPage.getItemDescription(), description);
+        ProductsPage.isProductsPageHeaderDisplayed();
+        Assert.assertEquals(ProductsPage.getProductDescription(productName), description);
+        Assert.assertEquals(ProductsPage.getProductPrice(productName), priceProduct);
     }
+
     @DataProvider
-    public Object[][] ProductInformationOnDetailPage() {
+    public Object[][] isProductInCatalogPresentTestData() {
         return new Object[][]{
                 {"Sauce Labs Backpack", "$29.99", "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection."},
                 {"Sauce Labs Bike Light", "$9.99", "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included."},
@@ -29,5 +27,4 @@ public class ItemDetailsTest extends BaseTest {
                 {"Test.allTheThings() T-Shirt (Red)", "$15.99", "This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a few tests. Super-soft and comfy ringspun combed cotton."}
         };
     }
-
 }

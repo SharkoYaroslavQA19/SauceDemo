@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Tests" parallel="classes" thread-count="1">
+    <parameter name="browser" value="chrome"/>
+    <test name="Regression tests">
+        <groups>
+            <run>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="Test"></package>
+        </packages>
+    </test>
+</suite>

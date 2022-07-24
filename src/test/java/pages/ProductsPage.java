@@ -10,6 +10,9 @@ public class ProductsPage extends HomePage {
     private final By productLink = By.cssSelector("a[id$='_link']");
     private final By productsPageHeader = By.id("header_container");
     private final By productsRemove = By.cssSelector("button[id^='remove-']");
+    private final By productPrice = By.className("inventory_item_price");
+    private final By descriptionText = By.className("inventory_item_desc");
+    private final By productName = By.className(".inventory_item_name");
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -33,7 +36,17 @@ public class ProductsPage extends HomePage {
         productContainer.findElement(addToCartButton).click();
     }
 
-    private WebElement getProductContainerByName(String productName) {
+    public WebElement getProductContainerByName(String productName) {
         return driver.findElement(By.xpath(String.format(productContainerLocator, productName)));
+    }
+
+    public String getProductPrice(String productName) {
+        WebElement productContainer = getProductContainerByName(productName);
+        return productContainer.findElement(productPrice).getText();
+    }
+
+    public String getProductDescription(String productName) {
+        WebElement productContainer = getProductContainerByName(productName);
+        return productContainer.findElement(descriptionText).getText();
     }
 }
