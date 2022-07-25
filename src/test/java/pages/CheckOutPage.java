@@ -4,15 +4,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class CheckOutPage extends HomePage {
-    private  By FirstNameInput = By.id("first-name");
-    private  By LastNameInput = By.id("last-name");
-    private  By ZipCodeInput = By.id("postal-code");
-    private  By CancelButton = By.id("cancel");
-    private  By ContinueButton = By.id("continue");
+    private final  By FirstNameInput = By.id("first-name");
+    private final  By LastNameInput = By.id("last-name");
+    private final  By ZipCodeInput = By.id("postal-code");
+    private final  By CancelButton = By.id("cancel");
+    private final  By ContinueButton = By.id("continue");
 
-    private  By ErrorMessage = By.cssSelector(".error-message-container.error");
+    private final  By ErrorMessage = By.cssSelector(".error-message-container.error");
 
-    private By checkoutForm = By.xpath("//form/div[@class='checkout_info']");
+    private final By checkoutForm = By.xpath("//form/div[@class='checkout_info']");
+    private final By OverviewCancelButton = By.id("cancel");
+    private final By OverviewFinishButton = By.id("finish");
+    private final By orderCompletionMessage = By.className("complete-header");
 
     public CheckOutPage (WebDriver driver) {
         super(driver);
@@ -41,5 +44,14 @@ public class CheckOutPage extends HomePage {
     public String getCheckoutErrorText(){
         return driver.findElement(ErrorMessage).getText();
     }
+    public void OverviewCancelCheckout() {
+        driver.findElement(OverviewCancelButton).click();
+    }
 
+    public void OverviewFinishCheckout() {
+        driver.findElement(OverviewFinishButton).click();
+    }
+    public String getOrderCompletionText() {
+        return driver.findElement(orderCompletionMessage).getText();
+    }
 }

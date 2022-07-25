@@ -3,10 +3,10 @@ package Test;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class shoppingCartTest extends BaseTest {
-    @Test
+public class ShoppingCartTest extends BaseTest {
+    @Test(description = "checking information about the product in the basket",groups = {"regression"})
     public void itemShoppingCartTest() {
-        LoginPage.login(USERNAME, PASSWORD);
+        LoginPageFactory.login(USERNAME, PASSWORD);
         ProductsPage.openItemByName(PRODUCT_NAME);
         ItemDetailsPage.clickAddToCartButton();
         ItemDetailsPage.clickShoppingCartButton();
@@ -14,9 +14,9 @@ public class shoppingCartTest extends BaseTest {
         Assert.assertEquals(ShoppingCartPage.getProductDescriptionShoppingCartText(PRODUCT_NAME), ITEM_DESCRIPTION);
     }
 
-    @Test
+    @Test(description = "removing an item from the cart",groups = {"regression"})
     public void removeItemShoppingCartTest() {
-        LoginPage.login(USERNAME, PASSWORD);
+        LoginPageFactory.login(USERNAME, PASSWORD);
         ProductsPage.openItemByName(PRODUCT_NAME);
         ItemDetailsPage.clickAddToCartButton();
         ItemDetailsPage.clickShoppingCartButton();
@@ -24,9 +24,9 @@ public class shoppingCartTest extends BaseTest {
         Assert.assertFalse(ShoppingCartPage.productPresent(PRODUCT_NAME));
     }
 
-@Test
+@Test(description = "deleting an item from the shopping cart",groups = {"regression"})
     public void removeItemShoppingCartTestTwo() {
-        LoginPage.login(USERNAME, PASSWORD);
+        LoginPageFactory.login(USERNAME, PASSWORD);
         ProductsPage.openItemByName(PRODUCT_NAME);
         ItemDetailsPage.clickAddToCartButton();
         ItemDetailsPage.clickShoppingCartButton();
