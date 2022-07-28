@@ -4,8 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPageFactory extends BasePage {
     static @FindBy(id = "login_button_container")
@@ -56,9 +54,6 @@ public class LoginPageFactory extends BasePage {
     }
 
     public boolean isLoginFormPresent() {
-        WebDriverWait wait = new WebDriverWait(driver,10);
-        wait.until(ExpectedConditions.visibilityOf(loginForm));
-        LoginPageFactory.loginForm.isDisplayed();
-        return true;
+        return  LoginPageFactory.loginForm.isDisplayed();
     }
 }

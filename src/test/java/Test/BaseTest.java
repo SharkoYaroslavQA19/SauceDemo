@@ -4,7 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
@@ -26,15 +26,16 @@ public  class BaseTest {
     protected final static String PRICE = "$9.99";
     protected final static String PRODUCT_NAME = "Sauce Labs Bike Light";
     protected final static String ITEM_DESCRIPTION = "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.";
-    @Parameters({"browser"})
+
     @BeforeClass(alwaysRun = true)
-    public void initialise(@Optional("chrome") String browserName, ITestContext testContext) throws Exception {
+    public void setUp(ITestContext testContext) throws Exception {
+        String browserName = System.getProperty("browser", "chrome");
         if (browserName.equals("chrome")) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
-        } else if (browserName.equals("Opera")) {
-            WebDriverManager.operadriver().setup();
-            driver = new OperaDriver();
+        } else if (browserName.equals("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
         } else {
             throw new Exception("Undefined browser type");
         }
