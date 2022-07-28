@@ -4,7 +4,14 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class ProductTest extends BaseTest {
+
+    protected final static String SORT_Z_TO_A = "Name (Z to A)";
+    protected final static String SORT_A_TO_Z = "Name (A to Z)";
 
     @Test(description = "Checking the availability of products in the catalog by name, price and description", groups = {"regression"}, dataProvider = "isProductInCatalogPresentTestData")
     public void isProductInCatalogPresentTest(String productName, String priceProduct, String description) {
@@ -26,5 +33,51 @@ public class ProductTest extends BaseTest {
                 {"Sauce Labs Onesie", "$7.99", "Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won't unravel."},
                 {"Test.allTheThings() T-Shirt (Red)", "$15.99", "This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a few tests. Super-soft and comfy ringspun combed cotton."}
         };
+    }
+
+
+    public List<String> expectedSortingProductAtoZ() {
+        List<String> expectedResult = new ArrayList<String>();
+        expectedResult.add("Sauce Labs Bike Light");
+        expectedResult.add("Sauce Labs Fleece Jacket");
+        expectedResult.add("Sauce Labs Bolt T-Shirt");
+        expectedResult.add("Sauce Labs Backpack");
+        expectedResult.add("Test.allTheThings() T-Shirt (Red)");
+        expectedResult.add("Sauce Labs Onesie");
+        Collections.sort(expectedResult);
+        return expectedResult;
+    }
+
+    @Test(description = "Сheck for sorting product from A to Z", groups = {"regression"})
+    public void sortTestAToZ() {
+        LoginPageFactory.setUserName(USERNAME);
+        LoginPageFactory.setPassword(PASSWORD);
+        LoginPageFactory.clickLoginButton();
+        ProductsPage.clickSorting(SORT_A_TO_Z);
+        ProductsPage.getSortingProduct();
+        Assert.assertEquals(ProductsPage.getSortingProduct(), expectedSortingProductAtoZ());
+    }
+
+    public List<String> expectedSortingProductZtoA() {
+        List<String> expectedResult = new ArrayList<String>();
+        expectedResult.add("Sauce Labs Bike Light");
+        expectedResult.add("Sauce Labs Fleece Jacket");
+        expectedResult.add("Sauce Labs Bolt T-Shirt");
+        expectedResult.add("Sauce Labs Backpack");
+        expectedResult.add("Test.allTheThings() T-Shirt (Red)");
+        expectedResult.add("Sauce Labs Onesie");
+        Collections.sort(expectedResult);
+        Collections.reverse(expectedResult);
+        return expectedResult;
+    }
+
+    @Test(description = "Check for sorting product from Z to A", groups = {"regression"})
+    public void sortTestZToA() {
+        LoginPageFactory.setUserName(USERNAME);
+        LoginPageFactory.setPassword(PASSWORD);
+        LoginPageFactory.clickLoginButton();
+        ProductsPage.clickSorting(SORT_Z_TO_A);
+        ProductsPage.getSortingProduct();
+        Assert.assertEquals(ProductsPage.getSortingProduct(), expectedSortingProductZtoA());
     }
 }
