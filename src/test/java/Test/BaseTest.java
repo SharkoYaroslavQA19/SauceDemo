@@ -15,12 +15,12 @@ import java.util.concurrent.TimeUnit;
 public  class BaseTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
-    protected LoginPageFactory LoginPageFactory;
-    protected ProductsPage ProductsPage;
-    protected ItemDetailsPage ItemDetailsPage;
+    protected pages.LoginPageFactory LoginPageFactory;
+    protected pages.ProductsPage ProductsPage;
+    protected pages.ItemDetailsPage ItemDetailsPage;
     protected ShoppingCartPage ShoppingCartPage;
-    protected CheckOutPage CheckOutPage;
-    protected BurgerPage BurgerPage;
+    protected pages.CheckOutPage CheckOutPage;
+    protected pages.BurgerPage BurgerPage;
     protected final static String USERNAME = "standard_user";
     protected final static String PASSWORD = "secret_sauce";
     protected final static String PRICE = "$9.99";
