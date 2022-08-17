@@ -3,6 +3,9 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 public class ProductsPage extends HomePage {
     String productContainerLocator = "//div[@class = 'inventory_item_name' and text() = '%s']/ancestor::div[@class='inventory_item']";
@@ -12,7 +15,8 @@ public class ProductsPage extends HomePage {
     private final By productsRemove = By.cssSelector("button[id^='remove-']");
     private final By productPrice = By.className("inventory_item_price");
     private final By descriptionText = By.className("inventory_item_desc");
-    private final By productName = By.className(".inventory_item_name");
+    private final By sortingButton = By.className("product_sort_container");
+
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -49,4 +53,14 @@ public class ProductsPage extends HomePage {
         WebElement productContainer = getProductContainerByName(productName);
         return productContainer.findElement(descriptionText).getText();
     }
+    public void clickSorting(String visibleText) {
+        Select select = new Select(driver.findElement(sortingButton));
+        select.selectByVisibleText(visibleText);
+    }
+    public List<String> getSortingProduct() {
+        List<WebElement> productsName = driver.findElements(By.className("inventory_item_name"));
+        List<String> name = productsName.stream().map(option -> option.getText()).toList();
+        return name;
+    }
+
 }
