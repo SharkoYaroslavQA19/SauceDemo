@@ -1,6 +1,7 @@
 package Test;
 
 
+import io.qameta.allure.Description;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -9,6 +10,7 @@ import static org.testng.Assert.assertEquals;
 public class ItemDetailsTest extends BaseTest {
 
   @Test(description = "checking information about all products",groups = {"regression"} ,dataProvider = "ProductInformationOnDetailPage")
+  @Description("Checking the description of the selected product")
    public void verifyItemNameAndPriceOnDetailsPage(String productName, String priceProduct, String description) {
         LoginPageFactory.setUserName(USERNAME);
         LoginPageFactory.setPassword(PASSWORD);

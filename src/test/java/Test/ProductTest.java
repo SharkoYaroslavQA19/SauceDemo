@@ -1,5 +1,6 @@
 package Test;
 
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -14,6 +15,7 @@ public class ProductTest extends BaseTest {
     protected final static String SORT_A_TO_Z = "Name (A to Z)";
 
     @Test(description = "Checking the availability of products in the catalog by name, price and description", groups = {"regression"}, dataProvider = "isProductInCatalogPresentTestData")
+    @Description("Checking the ratio of the name, price and description of the product in the catalog")
     public void isProductInCatalogPresentTest(String productName, String priceProduct, String description) {
         LoginPageFactory.setUserName(USERNAME);
         LoginPageFactory.setPassword(PASSWORD);
@@ -49,6 +51,7 @@ public class ProductTest extends BaseTest {
     }
 
     @Test(description = "Сheck for sorting product from A to Z", groups = {"regression"})
+    @Description("Checking the sorting of goods in the catalog from A to Z")
     public void sortTestAToZ() {
         LoginPageFactory.setUserName(USERNAME);
         LoginPageFactory.setPassword(PASSWORD);
@@ -72,6 +75,7 @@ public class ProductTest extends BaseTest {
     }
 
     @Test(description = "Check for sorting product from Z to A", groups = {"regression"})
+    @Description("Checking the sorting of goods in the catalog from Z to A")
     public void sortTestZToA() {
         LoginPageFactory.setUserName(USERNAME);
         LoginPageFactory.setPassword(PASSWORD);

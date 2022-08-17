@@ -1,5 +1,6 @@
 package Test;
 
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -11,8 +12,11 @@ public class CheckOutTest extends BaseTest {
     String CompletionText = "THANK YOU FOR YOUR ORDER";
 
     @Test(description = "data entry check when ordering",groups = {"smoke"})
+    @Description("registration of goods for purchase, filling in data")
     public void  positiveTest(){
-        LoginPageFactory.login(USERNAME,PASSWORD);
+        LoginPageFactory.setUserName(USERNAME);
+        LoginPageFactory.setPassword(PASSWORD);
+        LoginPageFactory.clickLoginButton();
         ProductsPage.openItemByName(PRODUCT_NAME);
         ItemDetailsPage.clickAddToCartButton();
         ItemDetailsPage.clickShoppingCartButton();
@@ -27,8 +31,11 @@ public class CheckOutTest extends BaseTest {
 
 
    @Test(description = "checking the correct data when buying",dataProvider = "negativeTestData", groups = {"negative"})
+   @Description("registration of goods for purchase, filling in incorrect data")
     public void  negativeTest(String firstName, String lastName, String zip, String errorMessage){
-       LoginPageFactory.login(USERNAME,PASSWORD);
+       LoginPageFactory.setUserName(USERNAME);
+       LoginPageFactory.setPassword(PASSWORD);
+       LoginPageFactory.clickLoginButton();
         ProductsPage.openItemByName(PRODUCT_NAME);
         ItemDetailsPage.clickAddToCartButton();
         ItemDetailsPage.clickShoppingCartButton();
@@ -53,8 +60,11 @@ public class CheckOutTest extends BaseTest {
         };
     }
     @Test(description = "verification of the final completed purchase", groups = {"smoke"})
+    @Description("full completion of the purchase")
     public void  checkOutFinishTest(){
-        LoginPageFactory.login(USERNAME,PASSWORD);
+        LoginPageFactory.setUserName(USERNAME);
+        LoginPageFactory.setPassword(PASSWORD);
+        LoginPageFactory.clickLoginButton();
         ProductsPage.openItemByName(PRODUCT_NAME);
         ItemDetailsPage.clickAddToCartButton();
         ItemDetailsPage.clickShoppingCartButton();
