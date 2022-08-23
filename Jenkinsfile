@@ -1,16 +1,18 @@
 pipeline {
     agent any
       triggers {
-            cron('H 0 * * *')
+            cron('0 22 * * *')
         }
 
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
-        maven "m3"
+        maven "Maven 3"
     }
 
     parameters {
-     gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
+     gitParameter branchFilter: 'origin/(.*)', defaultValue: 'main', name: 'BRANCH', type: 'PT_BRANCH'
+     choice(name: 'SUITE_NAME', choices: ['SmokeTest.xml', 'NegotiveTest.xml', 'RegressionTest.xml'], description: 'Choice suiteXmlFile')
+     choice(name: 'BROWSER', choices: ['chrome', 'firefox'], description: 'Choice browser')
     }
 
   stages {
@@ -20,7 +22,7 @@ pipeline {
                 git branch: "${params.BRANCH}", url: 'https://github.com/SharkoYaroslavQA19/SauceDemo.git'
 
                 // Run Maven on a Unix agent.
-               bat "mvn -Dmaven.test.failure.ignore=true clean test"
+               bat "mvn -Dmaven.test.failure.ignore=true -DsuiteXmlFile=${params.SUITE_NAME} -Dbrowser=${params.BROWSER} clean test"
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
