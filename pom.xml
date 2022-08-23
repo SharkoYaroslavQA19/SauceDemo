@@ -39,6 +39,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <suiteXmlFile>SmokeTest.xml</suiteXmlFile>
+        <browser>chrome</browser>
         <aspectj.version>1.9.8</aspectj.version>
     </properties>
 
@@ -49,8 +50,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
+                    <useSystemClassLoader>false</useSystemClassLoader>
                     <systemProperties>
-                        <browser>firefox</browser>
+                        <browser>${browser}</browser>
                     </systemProperties>
                     <suiteXmlFiles>
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
